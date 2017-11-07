@@ -1,6 +1,6 @@
 [package]
 name = "e2fslibs-sys"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Xavier Bestel <xavier.bestel@free.fr>"]
 links = "e2fslibs"
 description = "FFI bindings to e2fslibs"
