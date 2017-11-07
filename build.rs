@@ -11,9 +11,10 @@ fn main() {
     println!("cargo:version={}", library.version);
     let includedir = pkg_config::get_variable(lib, "includedir").unwrap();
     println!("cargo:includedir={}", includedir);
+
     let bindings = bindgen::Builder::default()
         .header("wrapper.h")
-        .clang_arg(includedir)
+        .clang_arg(format!("-I{}", includedir))
         .generate()
         .expect("Unable to generate bindings");
 
