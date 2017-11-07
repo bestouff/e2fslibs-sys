@@ -11,10 +11,16 @@ fn main() {
     println!("cargo:version={}", library.version);
     let includedir = pkg_config::get_variable(lib, "includedir").unwrap();
     println!("cargo:includedir={}", includedir);
+    let (clang_version_major, clang_version_minor) = bindgen::clang_version().parsed.unwrap();
 
     let bindings = bindgen::Builder::default()
         .header("wrapper.h")
         .clang_arg(format!("-I{}", includedir))
+        .clang_arg(format!(
+            "-I/usr/lib/clang/{}.{}/include",
+            clang_version_major,
+            clang_version_minor
+        ))
         .generate()
         .expect("Unable to generate bindings");
 
